@@ -1,0 +1,264 @@
+## spring boot 生产环境配置文件
+
+# 配置应用名称和上下文件路泾
+app-name: music
+
+# 服务器配置
+server:
+  port: 8080
+  # servlet相关配置
+  servlet:
+    context-path: /${app-name}
+  # 内置tomcat相关配置
+  tomcat:
+    max-threads: 200
+    max-connections: 10000
+    max-http-form-post-size: 1073741824
+
+# 日志配置
+logging:
+  level:
+    root: info
+
+# Spring 配置
+spring:
+  # 应用配置
+  main:
+    banner-mode: console
+  application:
+    name: ${app-name}
+  # http 配置
+  http:
+    encoding:
+      enabled: true
+      force: true
+      charset: UTF-8
+  # servlet 配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+      file-size-threshold: 0
+  # thymeleaf模板引擎的配置
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/views/
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+    mode: HTML
+  # freemarker模板引擎的配置
+  freemarker:
+    enabled: true
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    suffix: .ftl
+    template-loader-path: classpath:/templates/views
+  # json 配置
+  jackson:
+    default-property-inclusion: non_null # 包含所有非空属性
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone:  GMT+8
+  # 自动配置排除原生的druid配置，否则报错
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  # 多数据源配置
+  datasource:
+    # druid 全局配置
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: 123456
+    dynamic:
+      druid:
+        wall:
+          condition-double-const-allow: true
+          condition-and-alway-true-allow: true
+          condition-and-alway-false-allow: true
+      primary: master
+      # 为true必须在使用过程中指定数据源，为false则没有指定使用默认的primary数据源
+      strict: false
+      datasource:
+        # 配置名称为master的数据源，可以配置多数据源，在service类或方法是使用@DS("dsname")使用指定数据源
+        master:
+          url: jdbc:mysql://localhost:3306/music?useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+  # jpa 配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    show-sql: true
+    open-in-view: true
+    database: MYSQL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        connect:
+          autoReconect: true
+  # redis的相关配置
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    timeout: 50s
+    database: 10
+    lettuce:
+      pool:
+        max-active: 30
+        max-wait: 60s
+        max-idle: 20
+        min-idle: 5
+        time-between-eviction-runs: 120s
+  # 邮箱配置
+  mail:
+    host: smtp.163.com # 邮件服务地址
+    username: strive_framework@163.com # 邮箱地址
+    password: 1qazxcde32 # 邮件密码或客户端授权码
+    port: 465
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
+            required: true
+  # 配置ehcache缓存
+  cache:
+    type: none # 缓存由框架自定义配置，不让Spring自己创建缓存，以避免冲突
+    ehcache:
+      config: classpath:ehcache.xml
+    redis:
+      use-key-prefix: false
+      cache-null-values: true
+      time-to-live: 1800s # 缓存时间
+    cache-names:
+      - sys
+      - app
+  # session 配置
+  session:
+    store-type: none
+    timeout: 1800s
+    redis:
+      flush-mode: on_save
+      namespace: spring:session
+
+# MyBatis-plus 配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    call-setters-on-nulls: false
+    use-column-label: true
+    database-id: MYSQL
+    #打印mybatis sql，必要时显示
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_null
+      table-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# camunda 工作流配置
+
+
+# 属性文件加密配置
+jasypt:
+  encryptor:
+    algorithm: "PBEWithMD5AndDES"
+    password: "2B5AE67087694D269212ABFD2FFD37D"
+    property:
+      prefix: "ENC@("
+      suffix: ")"
+
+# 系统框架的配置
+strive:
+  # 应用名称
+  name: 基于SpringBoot2.2.5的基础开发框架
+  webservice:
+    # webservice地址
+    address: http://localhost:9090/strive/webservice/
+  mail:
+    send:
+      # 发送邮件的邮箱名称
+      username: strive_framework@163.com
+  upload:
+    # 文件上传路径
+    path: /opt/strive/files
+  temp:
+    # 临时文件路径
+    path: /opt/strive/tmp
+  cache:
+    # 启用缓存
+    enabled: true
+    ehcache:
+      # 使用ehcache进行缓存
+      enabled: true
+    redis:
+      # 使用redis进行缓，都启用，则redis为二级缓存
+      enabled: true
+  lock:
+    # 是否启用分布式锁，必须配置redis
+    enabled: true
+  log:
+    action:
+      # 是否启用注解行为日志，保存到数据库
+      enabled: true
+    access:
+      # 是否启用访问日志，保存到数据库
+      enabled: false
+    error:
+      # 是否启用异常日志，保存到数据库
+      enabled: true
+  oauth2:
+    redis:
+      # 是否启用redis保存token
+      enabled: true
+  sched:
+    # 是否运行调度器
+    enabled: false
+    # 并发执行任务的线程数
+    thread-count: 20
+    # 调度器停止通知邮箱
+    email:
+  pms:
+    url: http://localhost:8080/strive
+
+# oauth2 客户端配置，服务端不影响
+security:
+  oauth2:
+    client:
+      access-token-uri: ${strive.pms.url}/oauth/token
+      client-id: strive_app_id_sysplatform
+      client-secret: strive_app_secret_sysplatform
+      grant-type: password
+      scope: request
+    resource:
+      id: STRIVE_RESOURCE
+      token-info-uri: ${strive.pms.url}/oauth/check_token
+    authorization:
+      check-token-access: ${strive.pms.url}/oauth/check_token
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: localhost

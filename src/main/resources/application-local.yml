@@ -1,7 +1,7 @@
 ## spring boot 生产环境配置文件
 
 # 配置应用名称和上下文件路泾
-app-name: music
+app-name: project
 
 # 服务器配置
 server:
@@ -84,7 +84,7 @@ spring:
       datasource:
         # 配置名称为master的数据源，可以配置多数据源，在service类或方法是使用@DS("dsname")使用指定数据源
         master:
-          url: jdbc:mysql://localhost:3306/music?useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://localhost:3306/project?useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
           username: root
           password: 123456
           driver-class-name: com.mysql.cj.jdbc.Driver

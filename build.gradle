@@ -8,6 +8,8 @@ plugins {
     id 'war'
 }
 
+
+
 group = 'com.glv'
 version = '1.0.0'
 sourceCompatibility = 1.8

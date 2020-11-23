@@ -1,7 +1,7 @@
 ## spring boot 生产环境配置文件
 
 # 配置应用名称和上下文件路泾
-app-name: project
+app-name: project-backend
 
 # 服务器配置
 server:

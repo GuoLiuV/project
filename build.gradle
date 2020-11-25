@@ -126,16 +126,16 @@ dependencies {
     // mysql 连接包
     compile 'mysql:mysql-connector-java'
     // h2 内存数据库
-    compile 'com.h2database:h2'
+    // compile 'com.h2database:h2'
     // drools 相关依赖包
-    compile 'org.kie:kie-spring:7.35.0.Final'
-    compile 'org.kie:kie-api:7.35.0.Final'
-    compile 'org.kie:kie-ci:7.35.0.Final'
-    compile 'org.drools:drools-core:7.35.0.Final'
-    compile 'org.drools:drools-compiler:7.35.0.Final'
-    compile 'org.drools:drools-templates:7.35.0.Final'
-    compile 'org.drools:drools-decisiontables:7.35.0.Final'
-    compile 'org.drools:drools-api:5.1.1'
+    // compile 'org.kie:kie-spring:7.35.0.Final'
+    // compile 'org.kie:kie-api:7.35.0.Final'
+    // compile 'org.kie:kie-ci:7.35.0.Final'
+    // compile 'org.drools:drools-core:7.35.0.Final'
+    // compile 'org.drools:drools-compiler:7.35.0.Final'
+    // compile 'org.drools:drools-templates:7.35.0.Final'
+    // compile 'org.drools:drools-decisiontables:7.35.0.Final'
+    //  compile 'org.drools:drools-api:5.1.1'
 
     // 注解pojo相关包
     compileOnly 'org.projectlombok:lombok'

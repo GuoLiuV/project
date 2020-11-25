@@ -6,6 +6,6 @@
    \ \__\    \ \__\\ _\\ \_______\ \________\ \_______\ \_______\  \ \__\
     \|__|     \|__|\|__|\|_______|\|________|\|_______|\|_______|   \|__|
 
- Welcome to use the music system
+ Welcome to use the project system
  based on spring boot and strive framework.
  

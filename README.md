@@ -1,4 +1,4 @@
-## project项目介绍
+## project-backend项目介绍
 
 > 使用前请仔细阅读本文档
 
@@ -11,7 +11,7 @@
 的不同功能。
 
 
-## project 框架的构成
+## project-backend 框架的构成
 
 本框架主要由SpringBoot2.x（Spring5，Spring MVC等技术）、数据库访问（Hibernate、Mybatis）、
 安全框架（Spring Security）、页面模板（thymeleaf、freemarker）。
@@ -39,4 +39,4 @@
 - 框架使用内置H2数据库，构建好后可以直接运行，不需要任何其它操作，如果要使用其它数据库可修改c3p0.properties。
 - 框架黙认超级用户superadmin/123456，可使用此用户名与密码登录访问权限控制页面。
 
-## project 框架的目录使用约定
+## project-backend 框架的目录使用约定
